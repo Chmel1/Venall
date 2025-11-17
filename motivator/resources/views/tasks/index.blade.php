@@ -3,53 +3,143 @@
 @section('title', 'Мои задачи')
 
 @section('content')
-<div class="row">
-    <div class="col-md-8">
-        <h1>📝 Мои задачи</h1>
-        <p class="lead">Баланс: <span class="badge bg-primary">{{ $balance }} 💎</span></p>
-        <a href="{{route('rewards.index')}}" class="btn btn-outline-primary text-black px-3 py-2 rounded shadow-sm">Магазин</a>
-    </div>
-</div>
+<style>
+    :root {
+        --bg-dark: #0f172a;
+        --card-bg: #1e293b;
+        --text-color: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --primary: #60a5fa;
+        --success: #4ade80;
+        --info: #7dd3fc;
+        --light: #334155;
+    }
 
-<hr>
+    body {
+        background-color: var(--bg-dark) !important;
+        color: var(--text-color) !important;
+    }
 
-<!-- Форма добавления задачи -->
-<form action="{{ route('tasks.store') }}" method="POST" class="mb-4">
-    @csrf
-    <div class="row g-3">
-        <div class="col-md-8">
-            <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
-        </div>
-        <div class="col-md-2">
-            <input type="number" name="points" class="form-control" placeholder="Баллы" min="1" max="1000" required>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-success w-100">Добавить</button>
-        </div>
-    </div>
-</form>
+    .card, .form-control, .btn {
+        background-color: var(--card-bg) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-color) !important;
+    }
 
-@foreach($tasks as $task)
-    <div class="card mb-3 {{ $task->completed_at ? 'bg-light' : '' }}">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
+    .form-control::placeholder {
+        color: var(--text-muted) !important;
+    }
+
+    .card.bg-light {
+        background-color: rgba(30, 41, 59, 0.6) !important;
+    }
+
+    .badge.bg-primary {
+        background-color: var(--primary) !important;
+        color: #0f172a !important;
+    }
+
+    .badge.bg-info {
+        background-color: var(--info) !important;
+        color: #0f172a !important;
+    }
+
+    .text-success {
+        color: var(--success) !important;
+    }
+
+    .btn-outline-primary {
+        color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary) !important;
+        color: #0f172a !important;
+    }
+
+    .btn-success {
+        background-color: var(--success) !important;
+        border-color: var(--success) !important;
+        color: #0f172a !important;
+    }
+
+    .btn-success:hover {
+        background-color: #22c55e !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-color);
+    }
+
+    hr {
+        border-color: var(--border-color);
+    }
+</style>
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <strong>{{ $task->title }}</strong>
-                    <span class="badge bg-info ms-2">+{{ $task->points }} баллов</span>
-                    @if($task->completed_at)
-                        <span class="text-success ms-2">✅ Выполнено {{ $task->completed_at->format('d.m H:i') }}</span>
-                    @endif
+                    <h1>📝 Мои задачи</h1>
+                    <p class="lead">Баланс: <span class="badge bg-primary">{{ $balance }} 💎</span></p>
                 </div>
-                <div>
-                    @unless($task->completed_at)
-                        <form action="{{ route('tasks.complete', $task) }}" method="POST" style="display:inline;">
-                            @csrf @method('PATCH')
-                            <button type="submit" class="btn btn-sm btn-outline-primary">Выполнить</button>
-                        </form>
-                    @endunless
+                <a href="{{ route('rewards.index') }}" class="btn btn-outline-primary px-3 py-2">
+                    Магазин
+                </a>
+            </div>
+
+            <hr>
+
+            <!-- Центрированная форма добавления задачи -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form action="{{ route('tasks.store') }}" method="POST" class="p-3 rounded" style="background-color: #1e293b; border: 1px solid #334155;">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="points" class="form-control" placeholder="Баллы" min="1" max="1000" required>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-success w-100">Добавить</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+
+            <hr>
+
+            <!-- Список задач -->
+            @foreach($tasks as $task)
+                <div class="card mb-3 {{ $task->completed_at ? 'bg-light' : '' }}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ $task->title }}</strong>
+                                <span class="badge bg-info ms-2">+{{ $task->points }} баллов</span>
+                                @if($task->completed_at)
+                                    <span class="text-success ms-2">✅ Выполнено {{ $task->completed_at->format('d.m H:i') }}</span>
+                                @endif
+                            </div>
+                            <div>
+                                @unless($task->completed_at)
+                                    <form action="{{ route('tasks.complete', $task) }}" method="POST" style="display:inline;">
+                                        @csrf @method('PATCH')
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Выполнить</button>
+                                    </form>
+                                @endunless
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
-@endforeach
+</div>
 @endsection
