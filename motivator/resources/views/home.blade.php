@@ -97,7 +97,7 @@
                     <a href="{{ route('tasks.index') }}" class="text-decoration-none">
                         <div class="card h-100 shadow-sm hover-shadow">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">✅ Мотиватор</h5>
+                                <h5 class="card-title">Мотиватор</h5>
                                 <p class="card-text flex-grow-1">
                                     Управление задачами, прогрессом и наградами.
                                 </p>
@@ -115,7 +115,7 @@
                     <a href="{{ route('posts.index') }}" class="text-decoration-none">
                         <div class="card h-100 shadow-sm hover-shadow">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">📝 Блог</h5>
+                                <h5 class="card-title">Блог</h5>
                                 <p class="card-text flex-grow-1">
                                     Пишите посты, добавляйте комментарии.
                                 </p>
@@ -128,12 +128,31 @@
                     </a>
                 </div>
 
+                <!-- Карточка: dashboard -->
+                <div class="col">
+                    <a href="{{ route('dashboard') }}" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm hover-shadow">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Дашборд</h5>
+                                <p class="card-text flex-grow-1">
+                                    Вся нужная информация по сайту и не только.
+                                </p>
+                                <div class="mt-auto">
+                                    <span class="badge bg-info">Погода</span>
+                                    <span class="badge bg-primary">Курсы валют</span>
+                                    <span class="badge bg-secondary">И многое другое</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
                 {{-- Карточка: Скоро --}}
                 <div class="col">
                     <a href="#" class="text-decoration-none disabled">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">🚀 Новый проект</h5>
+                                <h5 class="card-title"> Новый проект</h5>
                                 <p class="card-text flex-grow-1">
                                     Скоро будет добавлено.
                                 </p>

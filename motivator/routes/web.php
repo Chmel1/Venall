@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,4 +32,7 @@ Route::middleware('auth')->group(function () {
 
     //Пути связанные с комментариями(для постов)
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    //Пути связанные с дешбордом
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
