@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 @else
-                    <p class="text-muted">Не удалось загрузить погоду</p>
+                    <p class="text-white-muted">Не удалось загрузить погоду</p>
                 @endif
             </div>
 
@@ -136,7 +136,7 @@
                         <a href="{{ route('posts.index') }}" class="btn btn-sm btn-outline-primary">Все посты</a>
                     </div>
                 @else
-                    <p class="text-muted">Нет постов</p>
+                    <p class="text-white-muted">Нет постов</p>
                 @endif
             </div>
 
@@ -159,7 +159,7 @@
                         </div>
                     @endforeach
                 @else
-                    <p class="text-muted">Нет комментариев</p>
+                    <p class="text-white-muted">Нет комментариев</p>
                 @endif
             </div>
         </div>
@@ -194,7 +194,7 @@
                         <a href="{{ route('rewards.index') }}" class="btn btn-sm btn-outline-primary">Все награды</a>
                     </div>
                 @else
-                    <p class="text-muted">Нет наград</p>
+                    <p class="text-white-muted">Нет наград</p>
                 @endif
             </div>
 

@@ -33,13 +33,13 @@ class DashboardController extends Controller
         ->limit(3)
         ->get();
     $topLikedPosts = Post::withCount('likes')//Последние 3 самых залайконых поста
-    ->orderBy('likes_count','desc')
-    ->limit(3)
-    ->get();
+        ->orderBy('likes_count','desc')
+        ->limit(3)
+        ->get();
     $recentComments = Comment::with('user','post') //Последние 3 комментария
-    ->orderBy('created_at','desc')
-    ->limit(3)
-    ->get();
+        ->orderBy('created_at','desc')
+        ->limit(3)
+        ->get();
 
     //Внешние данные
     $weather = $this->getWeather();

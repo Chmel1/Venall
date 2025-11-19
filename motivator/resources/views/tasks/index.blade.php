@@ -76,6 +76,19 @@
     hr {
         border-color: var(--border-color);
     }
+    .btn-add {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.875rem; /* немного уменьшить шрифт */
+    }
+    @media (max-width: 991px) {
+        .btn-add {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem !important;
+        }
+    }
+
 </style>
 
 <div class="container py-4">
@@ -94,24 +107,28 @@
             <hr>
 
             <!-- Центрированная форма добавления задачи -->
+
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form action="{{ route('tasks.store') }}" method="POST" class="p-3 rounded" style="background-color: #1e293b; border: 1px solid #334155;">
-                        @csrf
-                        <div class="row g-3">
-                            <div class="col-md-7">
-                                <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="number" name="points" class="form-control" placeholder="Баллы" min="1" max="1000" required>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-success w-100">Добавить</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="col-md-8">
+        <form action="{{ route('tasks.store') }}" method="POST" class="p-3 rounded" style="background-color: #1e293b; border: 1px solid #334155;">
+            @csrf
+            <div class="row g-2 align-items-end">
+                <div class="col-12 col-md">
+                    <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
+                </div>
+                <div class="col-12 col-md-auto">
+                    <input type="number" name="points" class="form-control w-100" placeholder="Баллы" min="1" max="1000" required>
+                </div>
+                <div class="col-12 col-md-auto">
+                    <button type="submit" class="btn btn-success w-100">
+                        <span class="d-none d-md-inline">Добавить</span>
+                        <span class="d-md-none"><i class="bi bi-plus-lg"></i></span>
+                    </button>
                 </div>
             </div>
+        </form>
+    </div>
+</div>
 
             <hr>
 
