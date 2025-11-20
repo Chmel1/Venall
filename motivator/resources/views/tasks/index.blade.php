@@ -109,26 +109,28 @@
             <!-- Центрированная форма добавления задачи -->
 
             <div class="row justify-content-center">
-    <div class="col-md-8">
-        <form action="{{ route('tasks.store') }}" method="POST" class="p-3 rounded" style="background-color: #1e293b; border: 1px solid #334155;">
-            @csrf
-            <div class="row g-2 align-items-end">
-                <div class="col-12 col-md">
-                    <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
-                </div>
-                <div class="col-12 col-md-auto">
-                    <input type="number" name="points" class="form-control w-100" placeholder="Баллы" min="1" max="1000" required>
-                </div>
-                <div class="col-12 col-md-auto">
-                    <button type="submit" class="btn btn-success w-100">
-                        <span class="d-none d-md-inline">Добавить</span>
-                        <span class="d-md-none"><i class="bi bi-plus-lg"></i></span>
-                    </button>
+                <div class="col-md-8">
+                    <form action="{{ route('tasks.store') }}" method="POST" class="p-3 rounded" style="background-color: #1e293b; border: 1px solid #334155;">
+                        @csrf
+                        <div class="row g-2 align-items-end">
+                            <div class="col-12 col-md">
+                                <input type="text" name="title" class="form-control" placeholder="Что сделать?" required>
+                            </div>
+                            <div class="col-12 col-md-auto">
+                                <input type="number" name="points" class="form-control w-100" placeholder="Баллы" min="1" max="1000" required>
+                            </div>
+                            @auth
+                            <div class="col-12 col-md-auto">
+                                <button type="submit" class="btn btn-success w-100">
+                                    <span class="d-none d-md-inline">Добавить</span>
+                                    <span class="d-md-none"><i class="bi bi-plus-lg"></i></span>
+                                </button>
+                            @endauth
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
 
             <hr>
 
