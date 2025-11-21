@@ -3,6 +3,8 @@
 use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Habbit\HabitController;
+use App\Http\Controllers\Habbit\HabitLogController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,13 +12,13 @@ use Illuminate\Support\Facades\Auth;
 require __DIR__.'/auth.php';
 
 Auth::routes();
-
+//Главная страница
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//Посты
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-//Пути связанные с дешбордом
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//Дешбордо
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     //Пути связанные с задачами и наградами
@@ -35,4 +37,10 @@ Route::middleware('auth')->group(function () {
 
     //Пути связанные с комментариями(для постов)
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    //Привычками
+    Route::resource('habits', HabitController::class)->except(['show']);
+
+    //Отметка выполнения
+    Route::post('/habits/{habit}/complete', [HabitLogController::class, 'store'])->name('habits.complete');
 });
