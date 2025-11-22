@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
+
+    
     public function index()
     {
         // Данные из Motivator — только для авторизованных

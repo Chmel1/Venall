@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Habits\Habit;
-use App\Models\HabitLog;
+use App\Models\Habits\HabitLog;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -18,7 +18,7 @@ class HabitService{
     public function getCurrentStreak(Habit $habit): int{
         $logs = $habit->logs()
             ->orderBy('date', 'desc')
-            ->pluc('date')
+            ->pluck('date')
             ->map(fn($date) => Carbon::parse($date))
             ->toArray();
 
@@ -37,12 +37,12 @@ class HabitService{
     }
     
     public function getAchivments(Habit $habit): array{
-        $achivments = [];
+        $achievements = [];
         $currentStreak = $this->getCurrentStreak($habit);
         $completionRate = $this->getCompletionRate($habit);
 
         if($currentStreak >= 7){
-            $achivments[] = [
+            $achievements[] = [
                 'name' => 'Огонь!',
                 'description' => '7 дней подряд',
                 'icon' => 'fire'
@@ -63,7 +63,7 @@ class HabitService{
                 'icon' => 'chart-line'
             ];
         }
-        return $achivments;
+        return $achievements;
     }
 
     public function getCompletionRate(Habit $habit):float{

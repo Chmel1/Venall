@@ -47,12 +47,6 @@ class User extends Authenticatable
         ];
     }
 
-    /*
-     * ==========================================
-     * СВЯЗИ (RELATIONS) — всё, что создаёт пользователь
-     * ==========================================
-     */
-
     // 🔹 Посты (блог)
     public function posts(): HasMany
     {
@@ -80,5 +74,10 @@ class User extends Authenticatable
     public function rewards(): HasMany
     {
         return $this->hasMany(Reward::class);
+    }
+    //Привычки
+    public function habits():HasMany
+    {
+        return $this->hasMany( \App\Models\Habits\Habit::class);
     }
 }

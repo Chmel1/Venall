@@ -1,5 +1,13 @@
 <?php
 
+// ДОБАВЬТЕ ЭТУ СТРОКУ ПЕРВОЙ СТРОКОЙ ФАЙЛА
+if (!function_exists('mb_split')) {
+    if (file_exists('C:/OSPanel/modules/php/PHP_8.4/ext/php_mbstring.dll')) {
+        dl('php_mbstring.dll');
+    } else {
+        die('КРИТИЧЕСКАЯ ОШИБКА: mbstring не найден. Переключитесь на PHP 8.3');
+    }
+}
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
